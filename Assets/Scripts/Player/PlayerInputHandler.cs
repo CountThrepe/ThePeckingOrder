@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInputHandler : MonoBehaviour
-{
+public class PlayerInputHandler : MonoBehaviour {
     private Vector2 move;
     private PlayerMovement movement;
 
@@ -10,13 +9,19 @@ public class PlayerInputHandler : MonoBehaviour
         movement = GetComponent<PlayerMovement>();
     }
 
-    void Update()
-    {
+    void FixedUpdate() {
         movement.Move(move.x, move.y > 0);
     }
 
-    public void OnMove(InputValue value)
-    {
+    public void OnMove(InputValue value) {
         move = value.Get<Vector2>();
+    }
+
+    public void OnPause() {
+        LevelManager.GetInstance().TogglePause();
+    }
+
+    public void OnCallback() {
+        movement.CloseRift();
     }
 }

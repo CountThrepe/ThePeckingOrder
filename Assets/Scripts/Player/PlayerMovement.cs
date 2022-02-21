@@ -4,21 +4,29 @@ using UnityEngine.Events;
 public class PlayerMovement : MonoBehaviour {
     [SerializeField] private float m_Speed = 5f;
     [SerializeField] private float m_JumpForce = 400f;                          // Amount of force added when the player jumps.
+    [SerializeField] private int m_JumpBuffer = 5;
+    [SerializeField] private int m_GroundedBuffer = 5;
     [Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;  // How much to smooth out the movement
     [SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
+    [SerializeField] private bool m_DoubleJump = false;
     [SerializeField] private LayerMask m_WhatIsGround;                          // A mask determining what is ground to the character
     [SerializeField] private Transform m_GroundCheck;                           // A position marking where to check if the player is grounded.
+    [SerializeField] private RiftManager m_Rift;
 
     const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
     private bool m_Grounded;            // Whether or not the player is grounded.
+    private bool rifting = false;
+    private bool canDoubleJump;
     private Rigidbody2D m_Rigidbody2D;
     private bool m_FacingRight = true;  // For determining which way the player is currently facing.
     private Vector3 m_Velocity = Vector3.zero;
     private bool canJump = true;
+    private int lastJump = 0;
     private bool frozen = false;
     private int cantJumpCounter = 0;
+    private int lastGrounded = 0;
 
-    // public Animator animator;
+    private Animator animator;
 
     [Header("Events")]
     [Space]
@@ -27,9 +35,11 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Awake() {
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
 
         if (OnLandEvent == null)
             OnLandEvent = new UnityEvent();
+
     }
 
     private void FixedUpdate() {
@@ -41,16 +51,22 @@ public class PlayerMovement : MonoBehaviour {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
         for (int i = 0; i < colliders.Length; i++) {
             if (colliders[i].gameObject != gameObject) {
-                m_Grounded = true;
+                lastGrounded = 0;
                 if (!wasGrounded) {
                     OnLandEvent.Invoke();
                 }
             }
         }
+        if (lastGrounded < m_GroundedBuffer) {
+            lastGrounded++;
+            m_Grounded = true;
+            canDoubleJump = true;
+        }
 
+        // Disable jumping immediately after jumping to avoid super fast double jump
         if (!canJump) {
             cantJumpCounter++;
-            if (cantJumpCounter > 10 || !m_Grounded) canJump = true;
+            if (cantJumpCounter > 5) canJump = true;
         }
     }
 
@@ -58,12 +74,24 @@ public class PlayerMovement : MonoBehaviour {
     public void Move(float move, bool jump) {
         if (frozen) return;
 
+        // Jump buffer stuff
+        if (lastJump == m_JumpBuffer && !jump) lastJump++;
+
+        if (jump && lastJump > m_JumpBuffer) lastJump = 0;
+        else jump = false;
+
+        if (lastJump < m_JumpBuffer) {
+            lastJump++;
+            jump = true;
+        }
+        
+
         //only control the player if grounded or airControl is turned on
         if (m_Grounded || m_AirControl) {
-            // Move the character by finding the target velocity
-            Vector3 targetVelocity = new Vector2(move * m_Speed, m_Rigidbody2D.velocity.y);
-            // And then smoothing it out and applying it to the character
-            m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+            float targetX = move * m_Speed, temp = 0;
+            float xVelocity = Mathf.SmoothDamp(m_Rigidbody2D.velocity.x, targetX, ref temp, m_MovementSmoothing);
+
+            m_Rigidbody2D.velocity = new Vector2(xVelocity, m_Rigidbody2D.velocity.y);
 
             // If the input is moving the player right and the player is facing left...
             if (move > 0 && !m_FacingRight) {
@@ -76,18 +104,36 @@ public class PlayerMovement : MonoBehaviour {
                 Flip();
             }
         }
+
+        bool readyToJump = (m_Grounded || (m_DoubleJump && canDoubleJump && !rifting)) && canJump;
         // If the player should jump...
-        if (m_Grounded && jump && canJump) {
-            // Add a vertical force to the player.
+        if (readyToJump && jump) {
+            // Stop their current vertical velocity
+            m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0);
+
+            // Add new vertical force to player
             m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+
+            if(!m_Grounded) OpenRift();
             canJump = false;
             cantJumpCounter = 0;
         }
 
         // Animator updates
-        // if (!m_Grounded) animator.SetBool("notGrounded", true);
-        // animator.SetFloat("Speed", Mathf.Abs(move));
-        // animator.SetFloat("vSpeed", m_Rigidbody2D.velocity.y);
+        animator.SetBool("Grounded", m_Grounded);
+        animator.SetFloat("Speed", Mathf.Abs(move));
+        animator.SetFloat("vSpeed", m_Rigidbody2D.velocity.y);
+    }
+
+    public void OpenRift() {
+        canDoubleJump = false;
+        rifting = true;
+        m_Rift.OpenRift(transform.position);
+    }
+
+    public void CloseRift() {
+        rifting = false;
+        m_Rift.CloseRift();
     }
 
     private void Flip() {
