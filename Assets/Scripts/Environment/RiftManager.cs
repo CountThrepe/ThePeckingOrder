@@ -7,8 +7,11 @@ public class RiftManager : MonoBehaviour {
     [HideInInspector]
     public float radius;
     private float lastRadius;
+    public Transform follow;
 
     private Animator animator;
+    private bool following = false;
+    private Vector2 lastPos;
     private RiftParameters[] shaders;
 
     void Start() {
@@ -26,15 +29,44 @@ public class RiftManager : MonoBehaviour {
             SetRiftRadius(radius);
             lastRadius = radius;
         }
+
+        if (following && lastPos != (Vector2) follow.position) {
+            SetRiftOrigin(follow.position);
+            lastPos = (Vector2) follow.position;
+        }
+    }
+
+    public void SetFollowing(int val) {
+        following = val > 0;
+        if (following) {
+            SetRiftOrigin(follow.position);
+            lastPos = (Vector2) follow.position;
+        }
+    }
+
+
+    public void Follow() {
+        if (!following) {
+            animator.SetInteger("Open", 2);
+        }
+    }
+
+    public void StopFollowing() {
+        if (following) {
+            CloseRift();
+        }
     }
 
     public void OpenRift(Vector2 origin) {
         SetRiftOrigin(origin);
-        animator.SetBool("Open", true);
+        animator.SetInteger("Open", 3);
     }
 
     public void CloseRift() {
-        animator.SetBool("Open", false);
+        if(animator.GetInteger("Open") != 1) {
+            animator.Play("RiftClose", 0, (6 - radius) / 6);
+            animator.SetInteger("Open", 1);
+        }
     }
 
     public void StartRiftSounds() {

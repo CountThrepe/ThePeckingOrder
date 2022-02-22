@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
     [SerializeField] private bool m_DoubleJump = false;
     [SerializeField] private LayerMask m_WhatIsGround;                          // A mask determining what is ground to the character
+    [SerializeField] private LayerMask m_WhatIsInvGround;
     [SerializeField] private Transform m_GroundCheck;                           // A position marking where to check if the player is grounded.
     [SerializeField] private RiftManager m_Rift;
 
@@ -28,18 +29,9 @@ public class PlayerMovement : MonoBehaviour {
 
     private Animator animator;
 
-    [Header("Events")]
-    [Space]
-
-    public UnityEvent OnLandEvent;
-
     private void Awake() {
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-
-        if (OnLandEvent == null)
-            OnLandEvent = new UnityEvent();
-
     }
 
     private void FixedUpdate() {
@@ -48,13 +40,13 @@ public class PlayerMovement : MonoBehaviour {
 
         // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
         // This can be done using layers instead but Sample Assets will not overwrite your project settings.
+        bool follow = false;
         Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
         for (int i = 0; i < colliders.Length; i++) {
             if (colliders[i].gameObject != gameObject) {
                 lastGrounded = 0;
-                if (!wasGrounded) {
-                    OnLandEvent.Invoke();
-                }
+                follow = colliders[i].gameObject.layer == LayerMask.NameToLayer("Invisible Environment") && !rifting;
+                break;
             }
         }
         if (lastGrounded < m_GroundedBuffer) {
@@ -62,6 +54,8 @@ public class PlayerMovement : MonoBehaviour {
             m_Grounded = true;
             canDoubleJump = true;
         }
+        if (follow) m_Rift.Follow();
+        else m_Rift.StopFollowing();
 
         // Disable jumping immediately after jumping to avoid super fast double jump
         if (!canJump) {
