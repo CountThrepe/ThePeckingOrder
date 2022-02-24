@@ -27,6 +27,8 @@ public class PlayerMovement : MonoBehaviour {
     private int cantJumpCounter = 0;
     private int lastGrounded = 0;
 
+    private Vector2 respawnPoint;
+
     private Animator animator;
 
     private void Awake() {
@@ -117,6 +119,16 @@ public class PlayerMovement : MonoBehaviour {
         animator.SetBool("Grounded", m_Grounded);
         animator.SetFloat("Speed", Mathf.Abs(move));
         animator.SetFloat("vSpeed", m_Rigidbody2D.velocity.y);
+    }
+
+    public void SetRespawn(Vector2 point) {
+        respawnPoint = point;
+    }
+
+    public void Respawn() {
+        transform.position = respawnPoint;
+        m_Rigidbody2D.velocity = Vector2.zero;
+        canDoubleJump = false;
     }
 
     public void OpenRift() {

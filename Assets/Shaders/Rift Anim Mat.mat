@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Rift Anim Mat
+  m_Shader: {fileID: -6465566751694194690, guid: b8d97453013476142bfed19919bc6812, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_ca3d61d02b9b4c4891452e7824f63bb9:
+        m_Texture: {fileID: 2800000, guid: d18be9532eab7194a9f2237f8bf87ea2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _AltTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 05954446f43e71d4fa73954a579bd705, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_7a9fe4a1b39043ea8eeee75bdebfba54: 0.5
+    - Vector1_b74b701a235e43fa909204d964ebca06: 1.63
+    - Vector1_c219d5b090a24b45be798bacbfc9b8b9: 4
+    - _Rad: 4
+    - _Scale: 1.5
+    - _Speed: 0.5
+    m_Colors:
+    - Color_a70452c7adcf403e8a79330f08665a6f: {r: 1, g: 1, b: 1, a: 1}
+    - Vector2_c8e3f5611b3a48599947276925b990a6: {r: 0, g: 0, b: 0, a: 0}
+    - Vector3_2f543e99f2b549f0a518b86388af75bc: {r: 13.8, g: 0.37, b: 0, a: 0}
+    - Vector4_eb010d6fe71e49068e6acb79cce25129: {r: 1, g: 1, b: 1, a: 1}
+    - _AltColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _MainColor: {r: 0, g: 0, b: 0, a: 0}
+    - _Origin: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []

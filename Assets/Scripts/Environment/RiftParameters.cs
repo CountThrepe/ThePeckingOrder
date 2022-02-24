@@ -6,17 +6,41 @@ public class RiftParameters : MonoBehaviour {
     public Texture2D alternateTexture;
     public Color alternateColor = Color.white;
 
+    public bool animated = false;
+    private Texture2D lastMTex, lastATex;
+
     public float speed = 0.5f;
     public float scale = 1.5f;
 
     private MaterialPropertyBlock mpb;
 
     public void Start() {
+        lastMTex = mainTexture;
+        lastATex = alternateTexture;
         UpdateParameters();
     }
 
     public void OnValidate() {
         UpdateParameters();
+    }
+
+    public void Update() {
+        if (animated) {
+            bool updates = false;
+            if (lastMTex != mainTexture) {
+                updates = true;
+                mpb.SetTexture("_MainTex", mainTexture);
+                lastMTex = mainTexture;
+            }
+
+            if (lastATex != alternateTexture) {
+                updates = true;
+                mpb.SetTexture("_AltTex", alternateTexture);
+                lastATex = alternateTexture;
+            }
+            
+            if (updates) GetComponent<Renderer>().SetPropertyBlock(mpb);
+        }
     }
 
     public void UpdateRadius(float radius) {
@@ -36,13 +60,15 @@ public class RiftParameters : MonoBehaviour {
 
     }
 
+
+
     private void UpdateParameters() {
         if(mpb == null) mpb = new MaterialPropertyBlock();
 
-        mpb.SetTexture("_MainTex", mainTexture);
-        mpb.SetColor("_MainColor", mainColor);
-        mpb.SetTexture("_AltTex", alternateTexture);
-        mpb.SetColor("_AltColor", alternateColor);
+        if (mainTexture != null) mpb.SetTexture("_MainTex", mainTexture);
+        if (mainColor != null) mpb.SetColor("_MainColor", mainColor);
+        if (alternateTexture != null) mpb.SetTexture("_AltTex", alternateTexture);
+        if (alternateColor != null) mpb.SetColor("_AltColor", alternateColor);
 
         mpb.SetFloat("_Speed", speed);
         mpb.SetFloat("_Scale", scale);

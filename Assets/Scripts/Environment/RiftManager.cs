@@ -10,16 +10,24 @@ public class RiftManager : MonoBehaviour {
     public Transform follow;
 
     private Animator animator;
+    private CircleCollider2D trigger;
     private bool following = false;
     private Vector2 lastPos;
     private RiftParameters[] shaders;
+    private BlobController[] blobs;
+
+    private bool rifting = false;
+    private bool wasPlayerInRift = false;
+
 
     void Start() {
         animator = GetComponent<Animator>();
+        trigger = GetComponent<CircleCollider2D>();
 
         shaders = environment.GetComponentsInChildren<RiftParameters>();
-        Debug.Log(shaders.Length);
         lastRadius = radius = 0;
+
+        blobs = environment.GetComponentsInChildren<BlobController>();
 
         SetRiftRadius(0);
     }
@@ -28,6 +36,7 @@ public class RiftManager : MonoBehaviour {
         if (lastRadius != radius) {
             SetRiftRadius(radius);
             lastRadius = radius;
+            if (radius > 2) trigger.radius = radius - 2;
         }
 
         if (following && lastPos != (Vector2) follow.position) {
@@ -43,7 +52,6 @@ public class RiftManager : MonoBehaviour {
             lastPos = (Vector2) follow.position;
         }
     }
-
 
     public void Follow() {
         if (!following) {
@@ -69,12 +77,37 @@ public class RiftManager : MonoBehaviour {
         }
     }
 
-    public void StartRiftSounds() {
+    public void StartRift() {
         fx.Play();
+        rifting = true;
+        RiftNotifyBlobs(rifting);
+        PlayerNotifyBlobs(true);
     }
 
-    public void StopRiftSounds() {
+    public void StopRift() {
         fx.Pause();
+        rifting = false;
+        RiftNotifyBlobs(rifting);
+    }
+
+    public bool GetRifting() {
+        return rifting;
+    }
+
+    private void OnTriggerStay2D(Collider2D other) {
+        if (radius > 2 && other.CompareTag("Player")) {
+            if (!wasPlayerInRift) {
+                PlayerNotifyBlobs(true);
+                wasPlayerInRift = true;
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other) {
+        if (radius > 2 && other.CompareTag("Player")) {
+            PlayerNotifyBlobs(false);
+            wasPlayerInRift = false;
+        }
     }
 
     private void SetRiftRadius(float rad) {
@@ -84,8 +117,33 @@ public class RiftManager : MonoBehaviour {
     }
 
     private void SetRiftOrigin(Vector2 origin) {
+        transform.position = origin;
         foreach (RiftParameters shader in shaders) {
             shader.UpdateOrigin(origin);
+        }
+    }
+
+    private void RiftNotifyBlobs(bool start) {
+        if (start) {
+            foreach (var blob in blobs) {
+                blob.OnRiftOpen(transform.position);
+            }
+        } else {
+            foreach (var blob in blobs) {
+                blob.OnRiftClose();
+            }
+        }
+    }
+
+    private void PlayerNotifyBlobs(bool enter) {
+        if (enter) {
+            foreach (var blob in blobs) {
+                blob.OnPlayerEnterRift();
+            }
+        } else {
+            foreach (var blob in blobs) {
+                blob.OnPlayerExitRift();
+            }
         }
     }
 }

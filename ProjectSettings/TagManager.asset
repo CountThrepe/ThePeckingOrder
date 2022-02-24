@@ -14,7 +14,7 @@ TagManager:
   - Environment
   - Background
   - Invisible Environment
-  - 
+  - Enemies
   - 
   - 
   - 
@@ -49,6 +49,9 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 2478764769
+    locked: 0
+  - name: Enemies
+    uniqueID: 1880863213
     locked: 0
   - name: Foreground
     uniqueID: 3137614479
