@@ -3,6 +3,7 @@ using UnityEngine;
 public class RiftManager : MonoBehaviour {
     public GameObject environment;
     public AudioSource music, fx;
+    public float radiusOffset = 3;
 
     [HideInInspector]
     public float radius;
@@ -36,7 +37,7 @@ public class RiftManager : MonoBehaviour {
         if (lastRadius != radius) {
             SetRiftRadius(radius);
             lastRadius = radius;
-            if (radius > 2) trigger.radius = radius - 2;
+            if (radius > radiusOffset) trigger.radius = radius - radiusOffset;
         }
 
         if (following && lastPos != (Vector2) follow.position) {
@@ -45,22 +46,26 @@ public class RiftManager : MonoBehaviour {
         }
     }
 
+    public void Flare() {
+        animator.SetTrigger("Flare");
+    }
+
+    public void ResetFlare() {
+        animator.ResetTrigger("Flare");
+    }
+
     public void SetFollowing(int val) {
         following = val > 0;
         if (following) {
-            Debug.Log("Started Following!");
             SetRiftOrigin(follow.position);
             lastPos = (Vector2) follow.position;
-        } else Debug.Log("Stopped Following!");
+        } 
     }
 
     public void Follow() {
-        Debug.Log(following);
-        Debug.Log(rifting);
         if (!following && !rifting) {
             animator.SetInteger("Open", 2);
             following = true;
-            Debug.Log("Started Following");
         }
     }
 
@@ -101,7 +106,7 @@ public class RiftManager : MonoBehaviour {
     }
 
     private void OnTriggerStay2D(Collider2D other) {
-        if (radius > 2 && other.CompareTag("Player")) {
+        if (radius > radiusOffset && other.CompareTag("Player")) {
             if (!wasPlayerInRift) {
                 PlayerNotifyBlobs(true);
                 wasPlayerInRift = true;
@@ -110,7 +115,7 @@ public class RiftManager : MonoBehaviour {
     }
 
     private void OnTriggerExit2D(Collider2D other) {
-        if (radius > 2 && other.CompareTag("Player")) {
+        if (radius > radiusOffset && other.CompareTag("Player")) {
             PlayerNotifyBlobs(false);
             wasPlayerInRift = false;
         }

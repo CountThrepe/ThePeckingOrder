@@ -105,7 +105,9 @@ public class PlayerMovement : MonoBehaviour {
             }
         }
 
-        bool readyToJump = (m_Grounded || (m_DoubleJump && canDoubleJump && !rifting)) && canJump;
+        bool readyToJump = (m_Grounded || (m_DoubleJump && canDoubleJump)) && canJump;
+        // bool flare = (!m_Grounded && (m_DoubleJump && canDoubleJump && rifting)) && canJump && jump;
+        // if (flare) m_Rift.Flare();
         // If the player should jump...
         if (readyToJump && jump) {
             // Stop their current vertical velocity

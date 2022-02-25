@@ -7,17 +7,25 @@ public class RiftParameters : MonoBehaviour {
     public Color alternateColor = Color.white;
 
     public bool animated = false;
+    public float optimizeDist = -1;
+    
+    private Material riftMat, regMat;
     private Texture2D lastMTex, lastATex;
 
     public float speed = 0.5f;
     public float scale = 1.5f;
 
     private MaterialPropertyBlock mpb;
+    private bool optimized = false;
 
     public void Start() {
+        riftMat = Resources.Load("Pulse Material", typeof(Material)) as Material;
+        regMat = Resources.Load("Sprite-Lit-Default", typeof(Material)) as Material;
+
         lastMTex = mainTexture;
         lastATex = alternateTexture;
         UpdateParameters();
+        GetComponent<Renderer>().material = riftMat;
     }
 
     public void OnValidate() {
@@ -25,6 +33,20 @@ public class RiftParameters : MonoBehaviour {
     }
 
     public void Update() {
+        if (optimizeDist > 0) { // If we're optimizing
+            if (Vector2.Distance(LevelManager.GetInstance().GetCameraPosition(), transform.position) > optimizeDist) { // If we should optimize right now
+                if (!optimized) {
+                    GetComponent<Renderer>().material = regMat;
+                    optimized = true;
+                }
+            } else { // If we should not be optimizing right now
+                if (optimized) {
+                    GetComponent<Renderer>().material = riftMat;
+                    optimized = false;
+                }
+            }
+        }
+
         if (animated) {
             bool updates = false;
             if (lastMTex != mainTexture) {
@@ -59,8 +81,6 @@ public class RiftParameters : MonoBehaviour {
         GetComponent<Renderer>().SetPropertyBlock(mpb);
 
     }
-
-
 
     private void UpdateParameters() {
         if(mpb == null) mpb = new MaterialPropertyBlock();

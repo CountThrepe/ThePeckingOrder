@@ -3,6 +3,7 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour {
     public GameObject environment;
     public PauseManager pause;
+    public Transform cam;
 
     public static LevelManager self;
 
@@ -21,5 +22,9 @@ public class LevelManager : MonoBehaviour {
     public void Quit() {
         Debug.Log("Quit!!!");
         Application.Quit();
+    }
+
+    public Vector2 GetCameraPosition() {
+        return cam.position;
     }
 }
