@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour {
     private bool frozen = false;
     private int cantJumpCounter = 0;
     private int lastGrounded = 0;
+    private bool wasFollowing = false;
 
     private Vector2 respawnPoint;
 
@@ -37,6 +38,8 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void FixedUpdate() {
+        rifting = m_Rift.GetRifting();
+        
         bool wasGrounded = m_Grounded;
         m_Grounded = false;
 
@@ -56,8 +59,9 @@ public class PlayerMovement : MonoBehaviour {
             m_Grounded = true;
             canDoubleJump = true;
         }
-        if (follow) m_Rift.Follow();
-        else m_Rift.StopFollowing();
+        if (follow && !wasFollowing) m_Rift.Follow();
+        else if (!follow && wasFollowing) m_Rift.StopFollowing();
+        wasFollowing = follow;
 
         // Disable jumping immediately after jumping to avoid super fast double jump
         if (!canJump) {
@@ -129,17 +133,18 @@ public class PlayerMovement : MonoBehaviour {
         transform.position = respawnPoint;
         m_Rigidbody2D.velocity = Vector2.zero;
         canDoubleJump = false;
+        CloseRift();
     }
 
     public void OpenRift() {
         canDoubleJump = false;
-        rifting = true;
         m_Rift.OpenRift(transform.position);
     }
 
     public void CloseRift() {
-        rifting = false;
-        m_Rift.CloseRift();
+        if (rifting) {
+            m_Rift.CloseRift();
+        }
     }
 
     private void Flip() {

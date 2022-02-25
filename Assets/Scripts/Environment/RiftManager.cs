@@ -48,14 +48,19 @@ public class RiftManager : MonoBehaviour {
     public void SetFollowing(int val) {
         following = val > 0;
         if (following) {
+            Debug.Log("Started Following!");
             SetRiftOrigin(follow.position);
             lastPos = (Vector2) follow.position;
-        }
+        } else Debug.Log("Stopped Following!");
     }
 
     public void Follow() {
-        if (!following) {
+        Debug.Log(following);
+        Debug.Log(rifting);
+        if (!following && !rifting) {
             animator.SetInteger("Open", 2);
+            following = true;
+            Debug.Log("Started Following");
         }
     }
 
@@ -66,13 +71,14 @@ public class RiftManager : MonoBehaviour {
     }
 
     public void OpenRift(Vector2 origin) {
-        SetRiftOrigin(origin);
-        animator.SetInteger("Open", 3);
+        if (!rifting) {
+            SetRiftOrigin(origin);
+            animator.SetInteger("Open", 3);
+        }
     }
 
     public void CloseRift() {
         if(animator.GetInteger("Open") != 1) {
-            animator.Play("RiftClose", 0, (6 - radius) / 6);
             animator.SetInteger("Open", 1);
         }
     }

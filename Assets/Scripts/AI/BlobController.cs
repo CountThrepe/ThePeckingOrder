@@ -3,7 +3,6 @@ using UnityEngine;
 public class BlobController : MonoBehaviour {
 
     public float avgVel = 3f;
-    public Vector2 home;
     public float range = 20;
     public float patience = 5;
     public float waitRange = 4;
@@ -11,6 +10,7 @@ public class BlobController : MonoBehaviour {
 
     [HideInInspector]
     public float velMult = 1;
+    private Vector2 home;
     private Vector2? area = null;
     private Vector2 wanderPoint;
     private bool targeting = false;
@@ -20,6 +20,7 @@ public class BlobController : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
+        home = transform.position;
         wanderPoint = home + (Random.insideUnitCircle * range);
     }
 
