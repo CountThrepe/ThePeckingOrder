@@ -25,7 +25,7 @@ public class RiftManager : MonoBehaviour {
         animator = GetComponent<Animator>();
         trigger = GetComponent<CircleCollider2D>();
 
-        shaders = environment.GetComponentsInChildren<RiftParameters>();
+        shaders = environment.GetComponentsInChildren<RiftParameters>(true);
         lastRadius = radius = 0;
 
         blobs = environment.GetComponentsInChildren<BlobController>();
@@ -123,14 +123,14 @@ public class RiftManager : MonoBehaviour {
 
     private void SetRiftRadius(float rad) {
         foreach (RiftParameters shader in shaders) {
-            shader.UpdateRadius(rad);
+            if (shader.gameObject.activeInHierarchy) shader.UpdateRadius(rad);
         }
     }
 
     private void SetRiftOrigin(Vector2 origin) {
         transform.position = origin;
         foreach (RiftParameters shader in shaders) {
-            shader.UpdateOrigin(origin);
+             if (shader.gameObject.activeInHierarchy) shader.UpdateOrigin(origin);
         }
     }
 

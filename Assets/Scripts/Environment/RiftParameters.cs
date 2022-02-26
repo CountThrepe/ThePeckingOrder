@@ -18,6 +18,8 @@ public class RiftParameters : MonoBehaviour {
     private MaterialPropertyBlock mpb;
     private bool optimized = false;
 
+    public bool bug = false;
+
     public void Start() {
         riftMat = Resources.Load("Pulse Material", typeof(Material)) as Material;
         regMat = Resources.Load("Sprite-Lit-Default", typeof(Material)) as Material;
@@ -74,6 +76,7 @@ public class RiftParameters : MonoBehaviour {
     }
 
     public void UpdateOrigin(Vector3 origin) {
+        Debug.Log(origin);
         if(mpb == null) mpb = new MaterialPropertyBlock();
 
         mpb.SetVector("_Origin", origin);

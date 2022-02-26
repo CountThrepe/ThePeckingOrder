@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private LayerMask m_WhatIsInvGround;
     [SerializeField] private Transform m_GroundCheck;                           // A position marking where to check if the player is grounded.
     [SerializeField] private RiftManager m_Rift;
+    public float maxSpeed = 10;
 
     const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
     private bool m_Grounded;            // Whether or not the player is grounded.
@@ -119,6 +120,10 @@ public class PlayerMovement : MonoBehaviour {
             if(!m_Grounded) OpenRift();
             canJump = false;
             cantJumpCounter = 0;
+        }
+
+        if (m_Rigidbody2D.velocity.y < -maxSpeed) {
+            m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, -maxSpeed);
         }
 
         // Animator updates

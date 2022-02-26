@@ -3,12 +3,12 @@ using UnityEngine;
 public class ChaseCam : MonoBehaviour {
     public float speed = 5;
     public Vector2 finalSpot;
+    public GameObject chasers;
 
     private Vector2 origPos;
     private bool moving = false;
 
 
-    // Start is called before the first frame update
     void Start() {
         origPos = transform.position;
     }
@@ -22,13 +22,22 @@ public class ChaseCam : MonoBehaviour {
     
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.CompareTag("Player")) {
-            moving = true;
+            StartChase();
         }
     }
 
     public bool ResetChase() {
-        if (moving) transform.position = origPos;
+        if (moving) {
+            transform.position = origPos;
+            chasers.SetActive(false);
+            chasers.SetActive(true);
+        }
 
         return moving;
+    }
+
+    private void StartChase() {
+        moving = true;
+        chasers.SetActive(true);
     }
 }
