@@ -76,7 +76,6 @@ public class RiftParameters : MonoBehaviour {
     }
 
     public void UpdateOrigin(Vector3 origin) {
-        Debug.Log(origin);
         if(mpb == null) mpb = new MaterialPropertyBlock();
 
         mpb.SetVector("_Origin", origin);
