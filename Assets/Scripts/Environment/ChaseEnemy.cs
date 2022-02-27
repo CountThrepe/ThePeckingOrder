@@ -5,8 +5,7 @@ public class ChaseEnemy : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Player")) {
-            bool chasing = chase.ResetChase();
-            if (chasing) other.gameObject.GetComponent<PlayerMovement>().Respawn();
+            other.GetComponent<PlayerMovement>().Die();
         }
     }
 }

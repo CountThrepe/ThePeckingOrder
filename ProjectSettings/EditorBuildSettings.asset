@@ -6,12 +6,30 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: 8da69b90247476e44baae5a4f83acbd3
+  - enabled: 1
     path: Assets/Scenes/Level 1.unity
     guid: 56b6e86041d83104197185eff64ce2ce
+  - enabled: 1
+    path: Assets/Scenes/Mirror Cutscene 1.unity
+    guid: 547e4530d76b90241aa997d2b9f38a5d
   - enabled: 1
     path: Assets/Scenes/Level 2.unity
     guid: 4d4176a57a54a584586a7f3c98e41c9a
   - enabled: 1
+    path: Assets/Scenes/Mirror Cutscene 2.unity
+    guid: dadc66f50e201c745ab795dc57920173
+  - enabled: 1
     path: Assets/Scenes/Level 3.unity
     guid: de7e358c5803fbe4dae02fd86b290ea8
+  - enabled: 1
+    path: Assets/Scenes/Mirror Cutscene 3.unity
+    guid: b957c45feeb27734992c358c824e5b5e
+  - enabled: 1
+    path: Assets/Scenes/Conform Ending.unity
+    guid: 4ce3b132b330b6142ae0940781f19211
+  - enabled: 1
+    path: Assets/Scenes/Escape Ending.unity
+    guid: 5fc6838778b732d449959294787da6ac
   m_configObjects: {}

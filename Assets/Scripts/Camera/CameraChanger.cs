@@ -3,6 +3,8 @@ using Cinemachine;
 
 public class CameraChanger : MonoBehaviour {
 
+    public bool permanent = false;
+
     [SerializeField]
     private CinemachineVirtualCamera followCam, roomCam;
     [SerializeField]
@@ -16,8 +18,8 @@ public class CameraChanger : MonoBehaviour {
     }
 
     private void OnTriggerExit2D(Collider2D other) {
-        if (other.CompareTag("Player")) {
-            roomCam.Priority = followCam.Priority - 1;
+        if (!permanent && other.CompareTag("Player")) {
+            if (!other.GetComponent<PlayerMovement>().GetFrozen()) roomCam.Priority = followCam.Priority - 1;
         }
     }
 }

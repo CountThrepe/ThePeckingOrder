@@ -9,6 +9,7 @@ public class RiftManager : MonoBehaviour {
     public float radius;
     private float lastRadius;
     public Transform follow;
+    public float outOfRange = 40;
 
     private Animator animator;
     private CircleCollider2D trigger;
@@ -44,6 +45,10 @@ public class RiftManager : MonoBehaviour {
             SetRiftOrigin(follow.position);
             lastPos = (Vector2) follow.position;
         }
+
+        if (Vector2.Distance(follow.position, transform.position) > outOfRange && rifting) {
+            CloseRift();
+        }
     }
 
     public void Flare() {
@@ -52,6 +57,23 @@ public class RiftManager : MonoBehaviour {
 
     public void ResetFlare() {
         animator.ResetTrigger("Flare");
+    }
+
+    public void Grow() {
+        if (radius == 0) SetRiftOrigin(follow.position);
+        animator.SetTrigger("Grow");
+    }
+
+    public void Reset() {
+        rifting = false;
+        following = false;
+        trigger.radius = 0;
+        radius = 0;
+        StopRift();
+        SetRiftRadius(0);
+        animator.SetInteger("Open", 1);
+        animator.ResetTrigger("Grow");
+        animator.Play("Idle", -1, 0);
     }
 
     public void SetFollowing(int val) {
@@ -73,6 +95,10 @@ public class RiftManager : MonoBehaviour {
         if (following) {
             CloseRift();
         }
+    }
+
+    public void SetFlip(bool val) {
+        GetComponent<SpriteRenderer>().flipX = val;
     }
 
     public void OpenRift(Vector2 origin) {
@@ -115,7 +141,7 @@ public class RiftManager : MonoBehaviour {
     }
 
     private void OnTriggerExit2D(Collider2D other) {
-        if (radius > radiusOffset && other.CompareTag("Player")) {
+        if (other.CompareTag("Player")) {
             PlayerNotifyBlobs(false);
             wasPlayerInRift = false;
         }

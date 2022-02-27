@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private Transform m_GroundCheck;                           // A position marking where to check if the player is grounded.
     [SerializeField] private RiftManager m_Rift;
     public float maxSpeed = 10;
+    public ChaseCam chase;
 
     const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
     private bool m_Grounded;            // Whether or not the player is grounded.
@@ -73,7 +74,10 @@ public class PlayerMovement : MonoBehaviour {
 
 
     public void Move(float move, bool jump) {
-        if (frozen) return;
+        if (frozen) {
+            if (m_Grounded) m_Rigidbody2D.velocity = new Vector2(0, m_Rigidbody2D.velocity.y);
+            return;
+        }
 
         // Jump buffer stuff
         if (lastJump == m_JumpBuffer && !jump) lastJump++;
@@ -136,11 +140,24 @@ public class PlayerMovement : MonoBehaviour {
         respawnPoint = point;
     }
 
+    public void Die() {
+        if (!frozen) {
+            animator.SetBool("Die", true);
+            frozen = true;
+            m_Rift.Grow();
+        }
+    }
+
     public void Respawn() {
+        if (chase != null) chase.ResetChase();
+
+        m_Rift.Reset();
+        animator.SetBool("Die", false);
+        animator.Play("Idle", -1, 0f);
         transform.position = respawnPoint;
         m_Rigidbody2D.velocity = Vector2.zero;
         canDoubleJump = false;
-        CloseRift();
+        frozen = false;
     }
 
     public void OpenRift() {
@@ -162,5 +179,15 @@ public class PlayerMovement : MonoBehaviour {
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+
+        m_Rift.SetFlip(m_FacingRight);
+    }
+
+    public void SetFrozen(int val) {
+        frozen = val != 0;
+    }
+
+    public bool GetFrozen() {
+        return frozen;
     }
 }

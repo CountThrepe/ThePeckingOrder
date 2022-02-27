@@ -10,6 +10,8 @@ public class BlobController : MonoBehaviour {
     public float lowFreq = 1000;
     public float highFreq = 22000;
 
+    public ChaseCam chase;
+
     [HideInInspector]
     public float velMult = 1;
     private Vector2 home;
@@ -60,7 +62,7 @@ public class BlobController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(targeting && other.CompareTag("Player")) {
-            other.gameObject.GetComponent<PlayerMovement>().Respawn();
+            other.gameObject.GetComponent<PlayerMovement>().Die();
             TeleportToEdge();
         }
     }
