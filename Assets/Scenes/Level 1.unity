@@ -82433,14 +82433,14 @@ PrefabInstance:
     - target: {fileID: 7001064936037041101, guid: 3fe45911c5f6ccd43bd6d26eeff07c4b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1971027905}
+      objectReference: {fileID: 1212094767}
     - target: {fileID: 7001064936037041101, guid: 3fe45911c5f6ccd43bd6d26eeff07c4b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: TogglePause
       objectReference: {fileID: 0}
     - target: {fileID: 7001064936037041101, guid: 3fe45911c5f6ccd43bd6d26eeff07c4b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PauseManager, Assembly-CSharp
+      value: LevelManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7189326384710787805, guid: 3fe45911c5f6ccd43bd6d26eeff07c4b, type: 3}
       propertyPath: m_Name
