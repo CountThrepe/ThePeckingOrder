@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour {
     private Vector2 respawnPoint;
 
     private Animator animator;
+    private GameObject murderer;
 
     private void Awake() {
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
@@ -140,11 +141,13 @@ public class PlayerMovement : MonoBehaviour {
         respawnPoint = point;
     }
 
-    public void Die() {
+    public void Die(GameObject other=null) {
         if (!frozen) {
             animator.SetBool("Die", true);
             frozen = true;
             m_Rift.Grow();
+            murderer = other;
+            GetComponent<AudioSource>().PlayDelayed(0);
         }
     }
 
@@ -158,6 +161,7 @@ public class PlayerMovement : MonoBehaviour {
         m_Rigidbody2D.velocity = Vector2.zero;
         canDoubleJump = false;
         frozen = false;
+        if (murderer != null) murderer.GetComponent<BlobController>().TeleportToEdge();
     }
 
     public void OpenRift() {

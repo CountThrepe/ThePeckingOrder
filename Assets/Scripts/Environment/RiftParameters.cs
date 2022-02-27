@@ -4,10 +4,10 @@ public class RiftParameters : MonoBehaviour {
     public Texture2D mainTexture;
     public Color mainColor = Color.white;
     public Texture2D alternateTexture;
-    public Color alternateColor = Color.white;
+    public Color alternateColor = new Color(183, 103, 141, 255);
 
     public bool animated = false;
-    public float optimizeDist = -1;
+    public float optimizeDist = 40;
     
     private Material riftMat, regMat;
     private Texture2D lastMTex, lastATex;

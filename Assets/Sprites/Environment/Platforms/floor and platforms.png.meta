@@ -59,6 +59,15 @@ TextureImporter:
   - first:
       213: 2425504815635247888
     second: floor and platforms_18
+  - first:
+      213: 1722045608507458742
+    second: floor and platforms_19
+  - first:
+      213: 2478969854057030528
+    second: floor and platforms_20
+  - first:
+      213: -398634240635275487
+    second: floor and platforms_21
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -164,7 +173,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1200
+        y: 1600
         width: 400
         height: 400
       alignment: 0
@@ -185,7 +194,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 400
-        y: 1200
+        y: 1600
         width: 400
         height: 400
       alignment: 0
@@ -206,7 +215,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 800
-        y: 1200
+        y: 1600
         width: 400
         height: 400
       alignment: 0
@@ -227,7 +236,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1200
-        y: 1200
+        y: 1600
         width: 400
         height: 400
       alignment: 0
@@ -248,7 +257,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1600
-        y: 1200
+        y: 1600
         width: 400
         height: 400
       alignment: 0
@@ -269,7 +278,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 800
+        y: 1200
         width: 400
         height: 400
       alignment: 0
@@ -290,7 +299,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 400
-        y: 800
+        y: 1200
         width: 400
         height: 400
       alignment: 0
@@ -311,7 +320,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 800
-        y: 800
+        y: 1200
         width: 400
         height: 400
       alignment: 0
@@ -332,7 +341,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1200
-        y: 800
+        y: 1200
         width: 400
         height: 400
       alignment: 0
@@ -353,7 +362,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1600
-        y: 800
+        y: 1200
         width: 400
         height: 400
       alignment: 0
@@ -374,7 +383,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 400
+        y: 800
         width: 400
         height: 400
       alignment: 0
@@ -395,7 +404,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 400
-        y: 400
+        y: 800
         width: 400
         height: 400
       alignment: 0
@@ -416,7 +425,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 800
-        y: 400
+        y: 800
         width: 400
         height: 400
       alignment: 0
@@ -437,7 +446,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1600
-        y: 400
+        y: 800
         width: 400
         height: 400
       alignment: 0
@@ -458,7 +467,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 400
         width: 400
         height: 400
       alignment: 0
@@ -479,7 +488,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 400
-        y: 0
+        y: 400
         width: 400
         height: 400
       alignment: 0
@@ -500,7 +509,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 800
-        y: 0
+        y: 400
         width: 400
         height: 400
       alignment: 0
@@ -521,7 +530,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1200
-        y: 0
+        y: 400
         width: 400
         height: 400
       alignment: 0
@@ -542,7 +551,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1600
-        y: 0
+        y: 400
         width: 400
         height: 400
       alignment: 0
@@ -554,6 +563,69 @@ TextureImporter:
       bones: []
       spriteID: 01330f867cf19a120800000000000000
       internalID: 2425504815635247888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor and platforms_19
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 400
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b4cb1e6b5fe5e710800000000000000
+      internalID: 1722045608507458742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor and platforms_20
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 0
+        width: 400
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 083a8f7b2f1176220800000000000000
+      internalID: 2478969854057030528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor and platforms_21
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 0
+        width: 400
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12770ab2544c77af0800000000000000
+      internalID: -398634240635275487
       vertices: []
       indices: 
       edges: []

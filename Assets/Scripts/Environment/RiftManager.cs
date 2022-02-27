@@ -10,6 +10,7 @@ public class RiftManager : MonoBehaviour {
     private float lastRadius;
     public Transform follow;
     public float outOfRange = 40;
+    public bool fromStart = false;
 
     private Animator animator;
     private CircleCollider2D trigger;
@@ -31,10 +32,16 @@ public class RiftManager : MonoBehaviour {
 
         blobs = environment.GetComponentsInChildren<BlobController>();
 
-        SetRiftRadius(0);
+        if (!fromStart) SetRiftRadius(0);
+        else {
+            SetRiftRadius(12);
+            SetRiftOrigin(transform.position);
+        }
     }
 
     void Update() {
+        if (fromStart) return;
+
         if (lastRadius != radius) {
             SetRiftRadius(radius);
             lastRadius = radius;

@@ -62,8 +62,7 @@ public class BlobController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(targeting && other.CompareTag("Player")) {
-            other.gameObject.GetComponent<PlayerMovement>().Die();
-            TeleportToEdge();
+            other.gameObject.GetComponent<PlayerMovement>().Die(gameObject);
         }
     }
 
@@ -87,14 +86,11 @@ public class BlobController : MonoBehaviour {
         float avoidRadius = inRift ? 0 : waitRange * 1.5f;
 
         Vector2 point = center + (Random.insideUnitCircle * radius);
-        // while (Vector2.Distance(point, player.position) < avoidRadius) {
-        //     point = home + (Random.insideUnitCircle * range);
-        // }
 
         wanderPoint = point;
     }
 
-    private void TeleportToEdge() {
-        transform.position = Random.insideUnitCircle.normalized * range;
+    public void TeleportToEdge() {
+        transform.position = (Random.insideUnitCircle.normalized * range) + home;
     }
 }

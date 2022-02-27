@@ -17,7 +17,6 @@ public class OwlController : MonoBehaviour {
     }
 
     void OnEnable() {
-        Debug.Log("Test");
         locked = false;
         lastBite = -1;
     }
@@ -26,7 +25,6 @@ public class OwlController : MonoBehaviour {
     void Update() {
         if (lastBite == -1 && Vector2.Distance(player.position, mirror.position) < biteStartDist) {
             lastBite = Time.time - biteBreak;
-            Debug.Log(lastBite);
         }
 
         if (!locked) {
@@ -48,7 +46,6 @@ public class OwlController : MonoBehaviour {
 
     private void RotateTowards() {
         Vector3 vectorToTarget = player.position - transform.position;
-        Debug.Log(vectorToTarget.x);
         if(vectorToTarget.x < -4) vectorToTarget = Vector3.right;
         float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
         Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);

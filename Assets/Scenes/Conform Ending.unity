@@ -357,7 +357,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 90d7593ff37af4e43b29dbec7168d48e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 909995604fc77b54cb1bd94f7a3819fd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -388,6 +388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crash: 1
+  nextScene: 1
 --- !u!95 &1691698645
 Animator:
   serializedVersion: 3
@@ -535,7 +536,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 8fc19eeef9ccda64a9520b1234a51865, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 3394b83ead916904384030bd2082303a, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

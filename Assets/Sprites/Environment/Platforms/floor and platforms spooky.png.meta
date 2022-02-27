@@ -62,6 +62,15 @@ TextureImporter:
   - first:
       213: -7334781643038065896
     second: floor and platforms spooky_19
+  - first:
+      213: 4188272767205534033
+    second: floor and platforms spooky_20
+  - first:
+      213: 4941459726087502084
+    second: floor and platforms spooky_21
+  - first:
+      213: -2328703499438296813
+    second: floor and platforms spooky_22
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -167,7 +176,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1200
+        y: 1600
         width: 400
         height: 400
       alignment: 0
@@ -188,7 +197,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 400
-        y: 1200
+        y: 1600
         width: 400
         height: 400
       alignment: 0
@@ -209,7 +218,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 800
-        y: 1200
+        y: 1600
         width: 400
         height: 400
       alignment: 0
@@ -230,7 +239,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1200
-        y: 1200
+        y: 1600
         width: 400
         height: 400
       alignment: 0
@@ -251,7 +260,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1600
-        y: 1200
+        y: 1600
         width: 400
         height: 400
       alignment: 0
@@ -272,7 +281,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 800
+        y: 1200
         width: 400
         height: 400
       alignment: 0
@@ -293,7 +302,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 400
-        y: 800
+        y: 1200
         width: 400
         height: 400
       alignment: 0
@@ -314,7 +323,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 800
-        y: 800
+        y: 1200
         width: 400
         height: 400
       alignment: 0
@@ -335,7 +344,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1200
-        y: 800
+        y: 1200
         width: 400
         height: 400
       alignment: 0
@@ -356,7 +365,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1600
-        y: 800
+        y: 1200
         width: 400
         height: 400
       alignment: 0
@@ -377,7 +386,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 400
+        y: 800
         width: 400
         height: 400
       alignment: 0
@@ -398,7 +407,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 400
-        y: 400
+        y: 800
         width: 400
         height: 400
       alignment: 0
@@ -419,7 +428,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 800
-        y: 400
+        y: 800
         width: 400
         height: 400
       alignment: 0
@@ -440,7 +449,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1200
-        y: 400
+        y: 800
         width: 400
         height: 400
       alignment: 0
@@ -461,7 +470,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1600
-        y: 400
+        y: 800
         width: 400
         height: 400
       alignment: 0
@@ -482,7 +491,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 400
         width: 400
         height: 400
       alignment: 0
@@ -503,7 +512,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 400
-        y: 0
+        y: 400
         width: 400
         height: 400
       alignment: 0
@@ -524,7 +533,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 800
-        y: 0
+        y: 400
         width: 400
         height: 400
       alignment: 0
@@ -545,7 +554,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1200
-        y: 0
+        y: 400
         width: 400
         height: 400
       alignment: 0
@@ -566,7 +575,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1600
-        y: 0
+        y: 400
         width: 400
         height: 400
       alignment: 0
@@ -578,6 +587,69 @@ TextureImporter:
       bones: []
       spriteID: 81bf8adf4fe953a90800000000000000
       internalID: -7334781643038065896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor and platforms spooky_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 400
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1596abf24ebbf1a30800000000000000
+      internalID: 4188272767205534033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor and platforms spooky_21
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 0
+        width: 400
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 409385d9077939440800000000000000
+      internalID: 4941459726087502084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor and platforms spooky_22
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 0
+        width: 400
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31175c85188ceafd0800000000000000
+      internalID: -2328703499438296813
       vertices: []
       indices: 
       edges: []

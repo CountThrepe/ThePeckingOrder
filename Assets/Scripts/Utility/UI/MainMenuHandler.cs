@@ -7,7 +7,6 @@ public class MainMenuHandler : MonoBehaviour {
     }
 
     public void Quit() {
-        Debug.Log("Exit!");
         Application.Quit();
     }
 }
